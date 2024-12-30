@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Website Trắc nghiệm</title>
+    <link rel = "icon" th:href =
+            "@{https://aztest.vn/uploads/news/2019/1_6.jpg}"
+          type = "image/x-icon">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link th:href="@{https://fonts.googleapis.com/css?family=Lato:300,400,700,900&display=swap}" rel="stylesheet">
+
+    <link rel="stylesheet"th:href="@{https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css}">
+    <link rel="stylesheet" th:href="@{/css/loader.css}">
+    <link rel="stylesheet" th:href="@{/login/css/style.css}">
+    <style>
+        #remember {
+            max-width: 15px;
+            max-height: 15px;
+            display: inline-block;
+            vertical-align: middle;
+            margin-left: 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<div id="preloader"></div>
+<section class="ftco-section">
+    <div class="container">
+        <div class="alert alert-primary alert-dismissible fade show" role="alert" th:if="${message}">
+            <strong th:text="${message}"></strong>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-md-6 text-center mb-5">
+                <!--                <h2 class="heading-section">Login #07</h2>-->
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-md-12 col-lg-10">
+                <div class="wrap d-md-flex">
+                    <div class="text-wrap p-4 p-lg-5 text-center d-flex align-items-center order-md-last" style="background: #00BFFF">
+                        <div class="text w-100">
+                            <h2><strong style="font-family: 'Times New Roman'">Chào mừng bạn đến với Website trắc nghiệm </strong></h2>
+                            <p>Không có tài khoản?</p>
+                            <a th:href="@{/signup}" class="btn btn-white btn-outline-white">Đăng Kí</a>
+                        </div>
+                    </div>
+                    <div class="login-wrap p-4 p-lg-5">
+                        <div class="d-flex">
+                            <div class="w-100">
+                                <h3 class="mb-4"><strong style="font-family: 'Times New Roman'">Đăng Nhập</strong></h3>
+                            </div>
+                            <div class="w-100">
+                                <p class="social-media d-flex justify-content-end">
+                                    <a href="/" class="social-icon d-flex align-items-center justify-content-center"><span
+                                            class="fa fa-home"></span></a>
+
+                                </p>
+                            </div>
+                        </div>
+                        <form action="/login"  method="post" class="signin-form">
+                            <div class="form-group mb-3">
+                                <label class="label" id="name">Tài Khoản</label>
+                                <input type="text" class="form-control" placeholder="Username" name="username"
+                                       oninvalid="InvalidMsg(this);" oninput="InvalidMsg(this);" required="required">
+                            </div>
+                            <div class="form-group mb-3">
+                                <label class="label" id="password">Mật Khẩu</label>
+                                <div class="input-group">
+                                    <input type="password" class="form-control" placeholder="Password" name="password"
+                                           id="password-input"
+                                           oninvalid="InvalidMsg(this);" oninput="InvalidMsg(this);" required="required">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-outline-primary" type="button" id="toggle-password"
+                                                style="border: none; cursor: pointer;">
+                                            <i class="fa fa-eye" id="password-icon"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group mb-3">
+                                <label class="label">Lưu đăng nhập? </label>
+                                <input type="checkbox" class="form-control" id="remember" name="remember-me">
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="form-control btn btn-primary submit px-3">Đăng Nhập</button>
+                            </div>
+                            <div class="form-group mt-2 text-center">
+                                <a href="javascript:void(0);" class="text-secondary" data-toggle="modal" data-target="#forgotPasswordModal">Quên mật khẩu?</a>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<!--    <div class="form-group mt-2 text-center">-->
+<!--        <a href="javascript:void(0);" class="text-secondary" data-toggle="modal" data-target="#forgotPasswordModal">Quên mật khẩu?</a>-->
+<!--    </div>-->
+
+    <!-- Modal -->
+    <div class="modal fade" id="forgotPasswordModal" tabindex="-1" role="dialog" aria-labelledby="forgotPasswordModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="forgotPasswordModalLabel">Quên mật khẩu</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="forgotPasswordForm">
+                        <div class="form-group">
+                            <label for="emailInput">Nhập email của bạn:</label>
+                            <input type="email" class="form-control" id="emailInput" placeholder="Nhập email" required>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                    <button type="button" class="btn btn-primary" id="sendEmailButton">OK</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
+<!--<script>-->
+<!--    function InvalidMsg(textbox) {-->
+<!--        if (textbox.value == '') {-->
+<!--            textbox.setCustomValidity('Trường này bắt buộc điền!!');-->
+<!--        }-->
+<!--        else if (textbox.validity.typeMismatch){-->
+<!--            textbox.setCustomValidity('Vui lòng nhập thông tin đúng!!');-->
+<!--        }-->
+<!--        else {-->
+<!--                textbox.setCustomValidity('');-->
+<!--            }-->
+<!--        return true;-->
+<!--    }-->
+
+<!--</script>-->
+<script th:src="@{/login/js/jquery.min.js}"></script>
+<script th:src="@{/login/js/popper.js}"></script>
+<script th:src="@{/login/js/bootstrap.min.js}"></script>
+<script th:src="@{/login/js/main.js}"></script>
+<script th:src="@{/js/loader.js}"></script>
+<script>
+    function InvalidMsg(textbox) {
+        if (textbox.value == '') {
+            textbox.setCustomValidity('Trường này bắt buộc điền!!');
+        }
+        else if (textbox.validity.typeMismatch){
+            textbox.setCustomValidity('Vui lòng nhập thông tin đúng!!');
+        }
+        else {
+            textbox.setCustomValidity('');
+        }
+        return true;
+    }
+
+    document.getElementById('toggle-password').addEventListener('click', function () {
+        const passwordInput = document.getElementById('password-input');
+        const passwordIcon = document.getElementById('password-icon');
+        if (passwordInput.type === 'password') {
+            passwordInput.type = 'text';
+            passwordIcon.classList.remove('fa-eye');
+            passwordIcon.classList.add('fa-eye-slash');
+        } else {
+            passwordInput.type = 'password';
+            passwordIcon.classList.remove('fa-eye-slash');
+            passwordIcon.classList.add('fa-eye');
+        }
+    });
+
+    document.getElementById('sendEmailButton').addEventListener('click', function () {
+        const email = document.getElementById('emailInput').value;
+
+        if (!email) {
+            alert('Vui lòng nhập email!');
+            return;
+        }
+
+        // Gọi hàm gửi email
+        sendForgotPasswordEmail(email);
+
+        // Đóng modal sau khi gửi
+        $('#forgotPasswordModal').modal('hide');
+    });
+
+    function sendForgotPasswordEmail(email) {
+        // Gửi yêu cầu AJAX đến server để gửi email
+        fetch('/reset-password', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ email }),
+        })
+            .then(response => response.text())  // Get the response as text (this matches your controller's return type)
+            .then(result => {
+                console.log({result})
+                alert(result)
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Đã xảy ra lỗi. Vui lòng thử lại sau.');
+            });
+    }
+
+</script>
+</body>
+</html>
